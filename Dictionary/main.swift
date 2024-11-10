@@ -41,3 +41,27 @@ import Foundation
 //}
 //
 //print(totalPrice(["socks":5, "shoes":60, "sweater":30]))
+
+
+//2. Написать функцию которая принимает строку и на выходе возвращает количество вхождений символов в строке
+//
+//"aaabbbccaa" → [a:5,b:3,c:2]
+//
+//"aaabbbccaaxyz" -> "a3b3c2a2xyz"
+
+//func findContains(_ string: String) -> [Character: Int] {
+//    var result: [Character: Int] = [:]
+//    var strArray: [Character] = Array(string)
+//    for item in strArray {
+//        if !result.keys.contains(item){
+//            result[item] = 1
+//        } else if result.keys.contains(item) {
+//            if let count = result[item] {
+//                result.updateValue(count + 1, forKey: item)
+//            }
+//        }
+//    }
+//    return result
+//}
+//
+//print(findContains("aaabbbccaa"))
