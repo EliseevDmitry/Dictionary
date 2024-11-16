@@ -68,6 +68,24 @@ import Foundation
 //print(findContains("aaabbbccaa"))
 
 
+//func findContains(_ string: String) -> [Character: Int] {
+//    var dict: [Character : Int] = [:]
+//    for item in string {
+//        dict[item, default: 0] += 1
+//    }
+//    return dict
+//}
+//
+//print(findContains("aaabbbccaa"))
+
+
+//func findContains(_ string: String) -> [Character: Int] {
+//    string.reduce(into: [Character:Int]()) {$0[$1, default: 0] += 1}
+//}
+//
+//print(findContains("aaabbbccaa"))
+
+
 //3. Дан массив - создать из него словарь в котором ключи элементы массива
 //а значения - элементы возведенные в куб
 //
@@ -335,5 +353,312 @@ import Foundation
 //
 //
 //func appersMode(string: String) -> [String] {
+//    var counter: [Character:Int] = [:]
+//    for item in Array(string) {
+//        if !counter.keys.contains(item) {
+//            counter[item] = Int()
+//        } else {
+//            if let count = counter[item] {
+//                counter.updateValue(count + 1, forKey: item)
+//            }
+//        }
+//    }
+//    return counter.filter {$0.value == counter.values.max() ?? 0}.map {String($0.key)}
 //}
 //
+//print(appersMode(string: "abcdefab"))
+
+
+//16. Отсортировать элементы в словаре чтобы value изменялось от большего к меньшему
+//
+//[3:1, 2:2, 1:3] -> [(1,3), (2,2), (3,1)]
+//[1:2, 2:4, 3:6] -> [(3,6), (2,4), (1,2)]
+//
+//func sortDict(_ dict: [Int: Int]) -> [(Int, Int)] {
+//    return dict.sorted { $0.value > $1.value }
+//}
+//
+//print(sortDict([3:1, 2:2, 1:3]))
+//
+
+//
+//17. Посчитайте ценность слова
+//
+//A, E, I, O, U, L, N, S, T, R – 1 очко;
+//D, G – 2 очка;
+//B, C, M, P – 3 очка;
+//F, H, V, W, Y – 4 очка;
+//K – 5 очков;
+//J, X – 8 очков;
+//Q, Z – 10 очков.
+//
+//APPLE = 1 + 3 + 3 + 1 + 1 = 9
+//
+//func score(_ string: String) -> Int {
+//    var charDictionary: [Character : Int] = Dictionary()
+//    for item in Array("A, E, I, O, U, L, N, S, T, R") {
+//        charDictionary[item] = 1
+//    }
+//    for item in Array("D, G") {
+//        charDictionary[item] = 2
+//    }
+//    for item in Array("B, C, M, P") {
+//        charDictionary[item] = 3
+//    }
+//    for item in Array("F, H, V, W, Y") {
+//        charDictionary[item] = 4
+//    }
+//    for item in Array("K") {
+//        charDictionary[item] = 5
+//    }
+//    for item in Array("J, X") {
+//        charDictionary[item] = 8
+//    }
+//    for item in Array("Q, Z") {
+//        charDictionary[item] = 10
+//    }
+//    var counter = Int()
+//    for item in string {
+//        if charDictionary.keys.contains(item) {
+//            if let number = charDictionary[item] {
+//                counter += number
+//            }
+//        }
+//    }
+//    return counter
+//}
+//
+//print(score("APPLE"))
+//
+//
+//18. Посчитать количество пар
+//(Усложненный вариант - решить за O(n))
+//
+//[0, 0, 0, 1, 1, 1, 1, 2, 2, 2] -> 4
+//[1, 1, 1, 2, 2, 2] -> 2
+//
+//func countCouples(array: [Int]) -> Int {
+//    var numberDict: [Int : Int] = [:]
+//    for item in array {
+//        if !numberDict.keys.contains(item) {
+//            numberDict[item] = 1
+//        } else {
+//            if let count = numberDict[item] {
+//                numberDict[item] = count + 1
+//            }
+//        }
+//    }
+//    var values = numberDict.values.makeIterator()
+//    var counter = Int()
+//    while let item = values.next() {
+//        counter += Int(item/2)
+//    }
+//    return counter
+//}
+//
+//print(countCouples(array: [1, 1, 1, 2, 2, 2]))
+
+
+//func countCouples(array: [Int]) -> Int {
+//    var elementArr = Int()
+//    var counter = 1
+//    var resultCount = Int()
+//    if let firstElement = array.first {
+//        elementArr = firstElement
+//    } else {
+//        return 0
+//    }
+//    for (index, item) in array.enumerated() {
+//        if index + 1 < array.count {
+//            if elementArr == array[index + 1] {
+//                counter += 1
+//            } else {
+//                counter += 1
+//                elementArr = array[index + 1]
+//                resultCount += Int(counter/2)
+//                counter = 1
+//            }
+//        }
+//    }
+//    return resultCount
+//}
+//
+//print(countCouples(array: [0, 0, 0, 1, 1, 1, 1, 2, 2, 2]))
+//БЕЗ СЛОВАРЯ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+//func countCouples(array: [Int]) -> Int {
+//    var dict: [Int : Int] = [:]
+//    var counter = Int()
+//    for item in array {
+//        dict[item, default: 0] += 1
+////        if dict[item, default: 0] % 2 == 0 {
+////            counter += 1
+////        }
+//        let value = dict[item, default: 0]
+//        
+//        if value % 2 == 0 {
+//            counter += 1
+//        }
+//        print(dict)
+//    }
+//    return 5
+//}
+//
+//print(countCouples(array: [0, 0, 0, 1, 1, 1, 1, 2, 2, 2]))
+
+func countCouples(array: [Int]) -> Int {
+    var dict: [Int : Int] = [:]
+    var leftIndex = 0
+    var rightIndex = array.count - 1
+    var counter = 0
+    while leftIndex < rightIndex {
+        dict[array[leftIndex], default: 0] += 1
+        let value = dict[array[leftIndex], default: 0]
+        if value % 2 == 0 {
+            counter += 1
+        }
+        leftIndex += 1
+        dict[array[rightIndex], default: 0] += 1
+        let value2 = dict[array[rightIndex], default: 0]
+        if value2 % 2 == 0 {
+            counter += 1
+        }
+        rightIndex -= 1
+        if leftIndex == rightIndex {
+            dict[array[leftIndex], default: 0] += 1
+            let value = dict[array[leftIndex], default: 0]
+            if value % 2 == 0 {
+                counter += 1
+            }
+            break
+        }
+    }
+    return counter
+}
+
+print(countCouples(array: [0, 0, 0, 1, 1, 1]))
+
+
+//
+//
+//
+//19. Есть словарь нужно получить key по значению
+//
+//["a": 101, "b": 102, "c": 103] и 101 -> "c"
+//
+//func keyByValue(value: Int, dict: [String: Int]) -> String {
+//dict.filter {$0.value == value}.map{$0.key}.first!
+//}
+//
+//print(keyByValue(value: 102, dict: ["a": 101, "b": 102, "c": 103, "f" : 102]))
+
+//
+//
+//20. Конвертнуть строку с данными в словарь
+//
+//"https:api.vk.com/authorize#token=12345&user_id=45678&expire_in=7890554012" ->
+//[token: 12345", user_id: 45678, expire_in: 7980554012]
+//
+//func convert(url: String) -> [String: Int] {
+//    var result: [String : Int] = Dictionary()
+//    let index = url.index(after: url.firstIndex(of: "#")!)
+//    let newString = url.suffix(from: index)
+//    let arrString = newString.components(separatedBy: "&")
+//    for item in arrString {
+//        let dataArr = item.components(separatedBy: "=")
+//        result[dataArr[0]] = Int(dataArr[1])
+//    }
+//    return result
+//}
+//
+//print(convert(url: "https:api.vk.com/authorize#token=12345&user_id=45678&expire_in=7890554012"))
+//
+//
+//
+// 21. Определить является ли слово изограммой (isogram) -
+// слово в котором нет повторяющихся букв, последовательных или непоследовательных
+//
+// "Dermatoglyphics" -> true
+// "moose" -> false
+// "aba" -> false
+//
+// func isIsogramm(_ string: String) -> Bool {
+//     var newDict: [Character : Character] = Dictionary()
+//     let newArr = Array(string)
+//     for item in newArr {
+//         if !newDict.keys.contains(item) {
+//             newDict[item] = item
+//         }
+//     }
+//     if string.count == newDict.count {
+//         return true
+//     } else {
+//         return false
+//     }
+// }
+//
+//print(isIsogramm("moose"))
+//
+//
+//
+// 22. Скомбинировать словари в один
+//
+// A = [ "a": 10, "b": 20, "c": 30 ]
+// B = [ "a": 3, "c": 6, "d": 3 ]
+// [A + B] -> [ "a": 13, "b": 20, "c": 36, "d": 3 ]
+//
+// func combine(array: [Dictionary<String, Int>]) -> Dictionary<String, Int> {
+//     if array.count < 2 && array.count > 2 {
+//         return [:]
+//     } else {
+//         var resultDict = array[0]
+//         for (key, value) in array[1] {
+//             if resultDict.keys.contains(key) {
+//                 if let dataInt =  resultDict[key] {
+//                     resultDict[key] = dataInt + value
+//                 }
+//             } else {
+//                 resultDict[key] = value
+//             }
+//         }
+//         return resultDict
+//     }
+// }
+//
+//print(combine(array: [[ "a": 10, "b": 20, "c": 30 ], [ "a": 3, "c": 6, "d": 3 ]]))
+
+
+
+let animalsInfo = [
+    "Fishes": ["Seabass", "Lion Fish", "Tuna"],
+    "Farm animals": ["Sheep", "Chocken", "Goat"],
+    "Home animals": ["Dog", "Cat", "Tiger"]
+]
+
+bestAnimals(from: animalsInfo)
+
+func bestAnimals(from animalsInfo: [String: [String]]) -> [String] {
+//    var animals: [String] = []
+//    for value in animalsInfo.values {
+//        animals.append(contentsOf: value)
+//    }
+//
+//    for (key, _) in animalsInfo
+//        guard let info = animalsInfo[key] else { continue }
+//        animals.append(contentsOf: info.sorted(by: { (lhs: String, rhs: String)  -> Bool in
+//            
+//            return lhs > rhs
+//            
+//        }))
+//        animals = animals.compactMap { animal in
+//            return animal.count > 3 ? animal : nil
+//        }.sorted(by: <)
+        
+    return animalsInfo.values
+        .flatMap {$0}
+        .filter{ $0.count > 3}
+        .sorted{$0.count < $1.count}
+    }
+
+
+print(bestAnimals(from: animalsInfo))
